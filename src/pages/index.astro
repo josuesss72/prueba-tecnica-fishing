@@ -1,16 +1,36 @@
 ---
-
+import LeaderBoard from "../components/leader-board/LeaderBoard";
+import Market from "../components/market/Market.astro";
+import RegisterSW from "../components/RegisterSW";
+import Tiers from "../components/tiers/Tiers.astro";
+import "../styles/global.css";
 ---
 
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
+		<link rel="manifest" href="/manifest.json" />
+		<title>Galactic Fishing Game</title>
+		<meta
+			name="description"
+			content="Application that shows the ranking of a game"
+		/>
+		<meta name="theme-color" content="#" />
+
+		<link rel="icon" href="/icon-64x64.png" sizes="64x64" />
 	</head>
-	<body>
-		<h1>Astro</h1>
+	<body class="p-4 bg-black/95 text-white flex flex-col items-center gap-8">
+		<RegisterSW client:load />
+		<h1 class="text-3xl font-bold text-center mb-6">
+			🎣 Galactic Fishing Game
+		</h1>
+		<main class="flex flex-col max-w-[1050px]">
+			<article class="md:flex md:justify-between">
+				<Tiers />
+				<Market />
+			</article>
+			<LeaderBoard client:load />
+		</main>
 	</body>
 </html>

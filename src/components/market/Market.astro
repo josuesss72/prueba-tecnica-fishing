@@ -1,0 +1,22 @@
+---
+import type { IItemMarket } from "../../types/market";
+import { API_HOST } from "astro:env/client";
+
+const res = await fetch(`${API_HOST}/game/market`);
+const { items } = await res.json();
+---
+
+<section class="flex flex-col items-center">
+	<h2 class="text-xl font-bold mb-2">🛒 Market</h2>
+	<ul class="space-y-2 md:flex md:flex-wrap md:gap-2 md:justify-center">
+		{
+			items.map((item: IItemMarket) => (
+				<li class="bg-gray-900 p-2 text-sm rounded flex flex-col md:w-[200px] justify-between">
+					<div class="font-semibold">{item.name}</div>
+					<div class="text-gray-500">{item.description}</div>
+					<div class="font-bold">{item.cost} 💰</div>
+				</li>
+			))
+		}
+	</ul>
+</section>
