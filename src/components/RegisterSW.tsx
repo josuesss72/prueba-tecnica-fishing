@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import { registerSW } from "../register-sw";
 
 export default function ServiceWorkerRegister() {
 	useEffect(() => {
