@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import { getRanking } from "../../helpers/getRanking";
 import type { IPlayerRanking } from "../../types/ranking";
 import { AnimatedNumber } from "./components/animate-number/AnimateNumber";
+import { usePlayersStore } from "../../store/useStore";
 
 const LeaderBoard = () => {
 	const [players, setPlayers] = useState<IPlayerRanking[]>([]);
+	const setPlayersStore = usePlayersStore((state) => state.setPlayers);
 	const [prevPlayers, setPrevPlayers] = useState<IPlayerRanking[]>([]);
 	const [player, setPlayer] = useState<IPlayerRanking>();
 	const [currentPage, setCurrentPage] = useState(1);
@@ -29,6 +31,7 @@ const LeaderBoard = () => {
 			try {
 				const ranking = await getRanking();
 				setPlayers(ranking.players);
+				setPlayersStore(ranking.players);
 			} catch (err) {
 				console.error("Error fetching leaderboard:", err);
 			}
@@ -57,7 +60,7 @@ const LeaderBoard = () => {
 	}, [players]);
 
 	return (
-		<section>
+		<section className="w-full">
 			<h2 className="text-xl font-bold mb-2">
 				<span className="text-2xl">🏆</span> Leaderboard
 			</h2>
@@ -72,7 +75,7 @@ const LeaderBoard = () => {
 					return (
 						<li
 							key={player.username}
-							className="bg-gray-900 p-2 rounded shadow text-xs grid grid-cols-[0.5fr_1fr_1fr_1fr]"
+							className="bg-gray-900 p-2 rounded shadow text-xs grid grid-cols-[0.3fr_1fr_0.5fr_1fr]"
 						>
 							<span>#{player.rank}</span>
 							<span className="max-w-[90px] overflow-hidden break-words md:max-w-full">
@@ -81,7 +84,7 @@ const LeaderBoard = () => {
 							<span className="bg-green-900 p-1 border-2 border-green-800 rounded-sm flex justify-center">
 								Lvl {player.level}
 							</span>
-							<article className="flex flex-col items-center">
+							<article className="flex flex-col items-center md:flex-row md:justify-end md:gap-4">
 								<AnimatedNumber
 									value={player.gold}
 									icon="💰"
