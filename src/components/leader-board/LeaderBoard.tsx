@@ -57,7 +57,7 @@ const LeaderBoard = () => {
 	}, [players]);
 
 	return (
-		<section className="p-4">
+		<section>
 			<h2 className="text-xl font-bold mb-2">
 				<span className="text-2xl">🏆</span> Leaderboard
 			</h2>
@@ -72,25 +72,29 @@ const LeaderBoard = () => {
 					return (
 						<li
 							key={player.username}
-							className="bg-gray-900 p-2 rounded shadow text-xs grid grid-cols-5"
+							className="bg-gray-900 p-2 rounded shadow text-xs grid grid-cols-[0.5fr_1fr_1fr_1fr]"
 						>
 							<span>#{player.rank}</span>
-							<span>{player.username}</span>
+							<span className="max-w-[90px] overflow-hidden break-words md:max-w-full">
+								{player.username}
+							</span>
 							<span className="bg-green-900 p-1 border-2 border-green-800 rounded-sm flex justify-center">
 								Lvl {player.level}
 							</span>
-							<AnimatedNumber
-								value={player.gold}
-								icon="💰"
-								previous={prev?.gold ?? 0}
-								players={players}
-							/>
-							<AnimatedNumber
-								value={player.xp}
-								icon="🥇"
-								previous={prev?.xp ?? 0}
-								players={players}
-							/>
+							<article className="flex flex-col items-center">
+								<AnimatedNumber
+									value={player.gold}
+									icon="💰"
+									previous={prev?.gold ?? 0}
+									players={players}
+								/>
+								<AnimatedNumber
+									value={player.xp}
+									icon="🥇"
+									previous={prev?.xp ?? 0}
+									players={players}
+								/>
+							</article>
 						</li>
 					);
 				})}
@@ -100,19 +104,19 @@ const LeaderBoard = () => {
 				<button
 					onClick={prevPage}
 					disabled={currentPage === 1}
-					className="px-4 py-2 bg-gray-900 rounded"
+					className="flex gap-2 text-sm px-4 py-2 bg-gray-900 rounded cursor-pointer"
 				>
-					⬅️ Anterior
+					<span>⬅️</span> <span>Anterior</span>
 				</button>
 				<span>
-					Página {currentPage} de {totalPages}
+					{currentPage} de {totalPages}
 				</span>
 				<button
 					onClick={nextPage}
 					disabled={currentPage === totalPages}
-					className="px-4 py-2 bg-gray-900 rounded"
+					className="flex gap-2 text-sm px-4 py-2 bg-gray-900 rounded cursor-pointer"
 				>
-					Siguiente ➡️
+					<span>Siguiente</span> <span>➡️</span>
 				</button>
 			</div>
 		</section>
