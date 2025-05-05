@@ -3,6 +3,7 @@ import LeaderBoard from "../components/leader-board/LeaderBoard";
 import Market from "../components/market/Market.astro";
 import RegisterSW from "../components/RegisterSW";
 import Tiers from "../components/tiers/Tiers.astro";
+import Profile from "../components/profile/Profile";
 import "../styles/global.css";
 ---
 
@@ -25,12 +26,17 @@ import "../styles/global.css";
 		<h1 class="text-3xl font-bold text-center mb-6">
 			🎣 Galactic Fishing Game
 		</h1>
-		<main class="flex flex-col max-w-[1050px] md:gap-8">
+		<main class="flex flex-col gap-8 max-w-[1050px]">
 			<article class="flex flex-col gap-8 md:flex-row md:justify-between">
 				<Tiers />
 				<Market />
 			</article>
-			<LeaderBoard client:load />
+			<article
+				class="grid grid-cols-1 gap-2 grid-rows-[0.3fr_1fr] md:grid-cols-[0.5fr_1fr] md:grid-rows-1"
+			>
+				<Profile client:load />
+				<LeaderBoard client:load />
+			</article>
 		</main>
 	</body>
 </html>
