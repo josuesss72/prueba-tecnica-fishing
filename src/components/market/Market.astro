@@ -6,7 +6,7 @@ const res = await fetch(`${API_HOST}/game/market`);
 const { items } = await res.json();
 ---
 
-<section class="flex flex-col items-center">
+<section class="flex flex-col md:items-center">
 	<h2 class="text-xl font-bold mb-2">🛒 Market</h2>
 	<ul class="space-y-2 md:flex md:flex-wrap md:gap-2 md:justify-center">
 		{
